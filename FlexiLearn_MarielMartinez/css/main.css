@@ -1,0 +1,182 @@
+﻿/**
+  This was created in PROG 32758 - Enterprise Java Development
+    Semester: Fall 2018
+    Author: Mariel Martinez
+*/
+
+* {
+    font-size: 1em;
+    font-family: Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    margin: 0;
+    background-color: #F5F1F2;
+}
+
+header, footer {
+    background-color: #25323C;
+    text-align: center;
+    margin: 0;
+}
+
+header {
+    padding: 10px;
+    border-bottom: 4px solid #E8B92B;
+}
+
+footer {
+    color: #FFFFFF;
+    padding: 20px;
+    border-top: 4px solid #E8B92B;
+}
+
+h1, h2 {
+    font-weight: bold;
+    margin: 5px;
+    color: #25323C;
+}
+
+header h2 {
+    color: #FFFFFF;
+}
+
+h1 {
+    font-size: 2em;
+    padding: 10px 0px;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 1.7em;
+    padding: 5px 0px;
+    text-transform: capitalize;
+}
+
+p, div {
+    padding: 2px;
+    margin: 4px 2px;
+}
+
+address {
+    font-size: 1.2em;
+    font-style: normal;
+}
+
+a:visited {
+    color: #595959;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    overflow: auto;
+}
+
+form {
+    margin: 3px;
+    padding: 5px;
+}
+
+fieldset > div {
+    display: inline-block;
+}
+
+input, select {
+    margin: 5px 0 5px 0;
+}
+
+/* Form inputs that are not submit or reset */
+input:not([type=submit]):not([type=reset]), select {
+    border: none;
+    border-bottom: 2px solid #25323C;
+    padding: 2px;
+    width: 100%;
+    display: block;
+}
+
+input:not([type=submit]):not([type=reset]):invalid, select {
+    background-color: #e2e2e2;
+}
+
+input:not([type=submit]):not([type=reset]):valid, select {
+    background-color: #e2e2e2;
+}
+
+input:not([type=submit]):not([type=reset]):focus, option {
+    background-color: #f8f8f8;
+}
+
+
+/* Submit and reset form inputs */
+input[type=submit], input[type=reset] {
+    border-radius: 5px;
+    border: none;
+    padding: 10px 20px;
+}
+
+input[type=submit] {
+    background-color: #983625;
+    color: white;
+    box-shadow: 2px 2px #d1d1d1;
+    font-weight: bold;
+}
+
+input[type=reset] {
+    color: #25323C;
+    background-color: #d1d1d1;
+    box-shadow: 2px 2px #e8e8e8;
+}
+
+    input[type=submit]:hover, input[type=reset]:hover {
+        cursor: pointer;
+    }
+
+table, th, td {
+    border: 1px solid darkgrey;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+th {
+    background-color: #25323C;
+    color: white;
+    padding: 10px 30px;
+}
+
+td {
+    padding: 5px 30px;
+}
+
+tr:nth-child(2n) {
+    background-color: lightgrey;
+}
+
+header a {
+    text-decoration: none;
+    color: #FFFFFF;
+    text-align: left;
+    font-size: 1.2em;
+}
+
+header a:visited {
+    color: #FFFFFF;
+}
+
+header h1 a {
+    color: #E8B92B;
+}
+
+header h1 a:visited {
+    color: #E8B92B;
+}
+
+a {
+    color: #983625;
+}
+
+a:visited {
+    color: #25323C
+}
