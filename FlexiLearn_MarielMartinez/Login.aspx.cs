@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using FlexiLearn_MarielMartinez.BusinessLogic.DAL;
@@ -22,18 +23,17 @@ namespace FlexiLearn_MarielMartinez {
         /// <param name="e"></param>
         protected void BtnLogin_Click(object sender, EventArgs e) {
             // Get inputs
-            string username = TxtUsername.Text;
+            string email = TxtEmail.Text;
             string password = TxtPassword.Text;
 
             // Authenticate and redirect depending on whether successful or not
             UserTableDAO userDao = new UserTableDAO(
                 ConfigurationManager.ConnectionStrings["flexiLearn"].ConnectionString);
-            if (userDao.AuthenticateUser(username, password)) {
-                // TODO redirect to members section
-                Response.Write("Yes");
+            if (userDao.AuthenticateUser(email, password)) {
+                FormsAuthentication.RedirectFromLoginPage(email, false);
             } else {
                 // TODO show error
-                Response.Write("No");
+                LblFail.Text = "Email  or password incorrect";
             }
         }
     }

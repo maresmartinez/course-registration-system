@@ -13,40 +13,31 @@ namespace FlexiLearn_MarielMartinez {
     public partial class GetMembership {
         
         /// <summary>
-        /// createAccountForm control.
+        /// LblName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm createAccountForm;
+        protected global::System.Web.UI.WebControls.Label LblName;
         
         /// <summary>
-        /// LblUsername control.
+        /// ReqName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LblUsername;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqName;
         
         /// <summary>
-        /// ReqUser control.
+        /// TxtName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator ReqUser;
-        
-        /// <summary>
-        /// TxtUsername control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtUsername;
+        protected global::System.Web.UI.WebControls.TextBox TxtName;
         
         /// <summary>
         /// LblEmail control.

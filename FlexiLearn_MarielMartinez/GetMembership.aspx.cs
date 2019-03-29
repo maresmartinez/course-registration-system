@@ -30,7 +30,7 @@ namespace FlexiLearn_MarielMartinez {
         /// <param name="e"></param>
         protected void BtnCreate_Click(object sender, EventArgs e) {
             // Get all inputs
-            string username = TxtUsername.Text;
+            string name = TxtName.Text;
             string email = TxtEmail.Text;
             string phone = TxtPhone.Text;
             EducationLevel level = (EducationLevel)Enum.Parse(typeof(EducationLevel), 
@@ -40,7 +40,7 @@ namespace FlexiLearn_MarielMartinez {
 
             User user = null;
             try {
-                user = new User(username, email, level, birthday, password);
+                user = new User(name, email, level, birthday, password);
             } catch (ArgumentException ex) {
                 // TODO: make error page to redirect to
                 Response.Redirect("~/GetMembership.aspx");

@@ -35,9 +35,9 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
                 SqlCommand insert;
                 if (string.IsNullOrEmpty(user.Phone)) {
                     // Adds users who do NOT have a phone number 
-                    insert = new SqlCommand("INSERT INTO UserTable (username, email, education, birthday, password, salt, registration_date) " +
+                    insert = new SqlCommand("INSERT INTO UserTable (name, email, education, birthday, password, salt, registration_date) " +
                         "VALUES (@UName, @Email, @Education, @Birthday, @Password, @Salt, @RegistrationDate);");
-                    insert.Parameters.AddWithValue("@UName", user.Username);
+                    insert.Parameters.AddWithValue("@UName", user.Name);
                     insert.Parameters.AddWithValue("@Email", user.Email);
                     insert.Parameters.AddWithValue("@Education", user.Education.ToString());
                     insert.Parameters.AddWithValue("@Birthday", user.Birthday);
@@ -46,9 +46,9 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
                     insert.Parameters.AddWithValue("@RegistrationDate", user.RegistrationDate);
                 } else {
                     // Adds users who DO have a phone number
-                    insert = new SqlCommand("INSERT INTO UserTable (username, email, phone, education, birthday, password, salt, registration_date) " +
+                    insert = new SqlCommand("INSERT INTO UserTable (name, email, phone, education, birthday, password, salt, registration_date) " +
                         "VALUES (@UName, @Email, @Phone, @Education, @Birthday, @Password, @Salt, @RegistrationDate);");
-                    insert.Parameters.AddWithValue("@UName", user.Username);
+                    insert.Parameters.AddWithValue("@UName", user.Name);
                     insert.Parameters.AddWithValue("@Email", user.Email);
                     insert.Parameters.AddWithValue("@Phone", user.Phone);
                     insert.Parameters.AddWithValue("@Education", user.Education.ToString());
@@ -66,23 +66,23 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
         }
 
         /// <summary>
-        /// Checks a username and password against the records in the UserTable. If credentials are invalid, this method 
-        /// will not specify whether it was the username or password that was incorrect.
+        /// Checks a email and password against the records in the UserTable. If credentials are invalid, this method 
+        /// will not specify whether it was the email or password that was incorrect.
         /// </summary>
-        /// <param name="username">The username of the user</param>
+        /// <param name="email">The email of the user</param>
         /// <param name="plainTextPassword">The password in plain-text of the user</param>
-        /// <returns>Whether or not the username and password matched any records in the UserTable</returns>
-        public bool AuthenticateUser(string username, string plainTextPassword) {
+        /// <returns>Whether or not the email and password matched any records in the UserTable</returns>
+        public bool AuthenticateUser(string email, string plainTextPassword) {
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
 
-                SqlCommand select = new SqlCommand("SELECT * FROM UserTable WHERE username=@UName");
-                select.Parameters.AddWithValue("@UName", username);
+                SqlCommand select = new SqlCommand("SELECT * FROM UserTable WHERE email=@UEmail");
+                select.Parameters.AddWithValue("@UEmail", email);
                 select.Connection = connection;
                 SqlDataReader reader = select.ExecuteReader();
 
                 if (reader.Read()) {
-                    // User with that username exists
+                    // User with that email exists
 
                     string salt = Convert.ToString(reader["salt"]);
                     string storedPassword = Convert.ToString(reader["password"]);
@@ -100,6 +100,39 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
                 }
             }
             return false;
+        }
+
+        /// <summary>
+        /// Retruns a user record based on a email
+        /// </summary>
+        /// <param name="email">Email of the record </param>
+        /// <returns>Either the user object with the details of the record, or null if no email exists</returns>
+        public User SearchByEmail(string email) {
+            User user = null;
+
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                connection.Open();
+
+                SqlCommand select = new SqlCommand("SELECT * FROM UserTable WHERE email=@UEmail;");
+                select.Parameters.AddWithValue("@UEmail", email);
+
+                select.Connection = connection;
+                SqlDataReader reader = select.ExecuteReader();
+
+                if (reader.Read()) {
+                    user = new User(
+                        Convert.ToString(reader["name"]),
+                        Convert.ToString(reader["email"]),
+                        Convert.ToString(reader["phone"]),
+                        (EducationLevel)Enum.Parse(typeof(EducationLevel), Convert.ToString(reader["education"])),
+                        Convert.ToString(reader["birthday"]),
+                        Convert.ToString(reader["password"]),
+                        Convert.ToString(reader["registration_date"])
+                    );
+                }
+            }
+
+            return user;
         }
     }
 }

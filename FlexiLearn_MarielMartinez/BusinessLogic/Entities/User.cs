@@ -8,19 +8,19 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.Entities {
     public class User {
 
         /// <summary>
-        /// Display name of user
+        /// Name of user
         /// </summary>
-        string username;
+        string name;
         /// <summary>
-        /// Display name of user
+        /// Name of user
         /// </summary>
-        public string Username {
-            get { return username; }
+        public string Name {
+            get { return name; }
             set {
                 if (string.IsNullOrEmpty(value)) {
-                    throw new ArgumentException("Username must have a value");
+                    throw new ArgumentException("Name must have a value");
                 }
-                username = value;
+                name = value;
             }
         }
 
@@ -58,9 +58,11 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.Entities {
             get { return phone; }
             set {
                 if (string.IsNullOrEmpty(value)) {
-                    throw new ArgumentException("Phone must have a value");
+                    phone = value; // phone is optional, so can be null
+                    return;
                 }
 
+                // If phone not null, ensure it is in the right format
                 Regex phoneReg = new Regex(@"^\(?\d\d\d\)?\d\d\d\-?\d\d\d\d$");
                 if (!phoneReg.IsMatch(value)) {
                     throw new ArgumentException("Phone must be in the format (555)555-5555");
@@ -159,14 +161,14 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.Entities {
         /// <summary>
         /// Constructor for User object
         /// </summary>
-        /// <param name="username">Username</param>
+        /// <param name="name">Name</param>
         /// <param name="email">Email</param>
         /// <param name="education">Level of Education</param>
         /// <param name="birthday">Birthday</param>
         /// <param name="plainTextPass">Password in plain-text</param>
-        public User(string username, string email, EducationLevel education, 
+        public User(string name, string email, EducationLevel education, 
             string birthday, string plainTextPass) {
-            Username = username;
+            Name = name;
             Email = email;
             Education = education;
             Birthday = birthday;
@@ -180,20 +182,66 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.Entities {
         /// <summary>
         /// Constructor for User object
         /// </summary>
-        /// <param name="username">Username</param>
+        /// <param name="name">Name</param>
         /// <param name="email">Email</param>
         /// <param name="phone">Phone</param>
         /// <param name="education">Level of education</param>
         /// <param name="birthday">Birthday</param>
         /// <param name="plainTextPass">Password in plain-text</param>
-        public User(string username, string email, string phone, EducationLevel education,
+        public User(string name, string email, string phone, EducationLevel education,
             string birthday, string plainTextPass) {
-            Username = username;
+            Name = name;
             Phone = phone;
             Email = email;
             Education = education;
             Birthday = birthday;
             RegistrationDate = DateTime.UtcNow.Date.ToShortDateString();
+
+            // Secure the password
+            Salt = HashUtil.GetSalt();
+            Password = HashUtil.GetPasswordHash(plainTextPass, Salt);
+        }
+
+        /// <summary>
+        /// Constructor for User object
+        /// </summary>
+        /// <param name="name">Name</param>
+        /// <param name="email">Email</param>
+        /// <param name="education">Level of education</param>
+        /// <param name="birthday">Birthday</param>
+        /// <param name="plainTextPass">Password in plain-text</param>
+        /// <param name="registrationDate">The date the user registered</param>
+        public User(string name, string email, EducationLevel education,
+            string birthday, string plainTextPass, string registrationDate) {
+            Name = name;
+            Email = email;
+            Education = education;
+            Birthday = birthday;
+            RegistrationDate = registrationDate;
+
+            // Secure the password
+            Salt = HashUtil.GetSalt();
+            Password = HashUtil.GetPasswordHash(plainTextPass, Salt);
+        }
+
+        /// <summary>
+        /// Constructor for User object
+        /// </summary>
+        /// <param name="name">Name</param>
+        /// <param name="email">Email</param>
+        /// <param name="phone">Phone</param>
+        /// <param name="education">Level of education</param>
+        /// <param name="birthday">Birthday</param>
+        /// <param name="plainTextPass">Password in plain-text</param>
+        /// <param name="registrationDate">The date the user registered</param>
+        public User(string name, string email, string phone, EducationLevel education,
+            string birthday, string plainTextPass, string registrationDate) {
+            Name = name;
+            Phone = phone;
+            Email = email;
+            Education = education;
+            Birthday = birthday;
+            RegistrationDate = registrationDate;
 
             // Secure the password
             Salt = HashUtil.GetSalt();

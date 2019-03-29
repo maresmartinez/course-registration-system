@@ -22,22 +22,49 @@ namespace FlexiLearn_MarielMartinez {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
         
         /// <summary>
-        /// HLLogin control.
+        /// contentForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HLLogin;
+        protected global::System.Web.UI.HtmlControls.HtmlForm contentForm;
         
         /// <summary>
-        /// HLLogout control.
+        /// HLHome control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HLLogout;
+        protected global::System.Web.UI.WebControls.HyperLink HLHome;
+        
+        /// <summary>
+        /// HLDashboard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HLDashboard;
+        
+        /// <summary>
+        /// HLRegistration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HLRegistration;
+        
+        /// <summary>
+        /// LBLoginLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LBLoginLogout;
         
         /// <summary>
         /// MainContent control.

@@ -10,17 +10,25 @@
     <link rel="stylesheet" type="text/css" href="./css/main.css" />
 </head>
 <body>
-    <header>
-        <h1><a href="./Home.aspx">FlexiLearn</a></h1>
-        <asp:HyperLink ID="HLLogin" runat="server" href="./Login.aspx">Login</asp:HyperLink>
-        <asp:HyperLink ID="HLLogout" runat="server" href="./Logout.aspx">Logout</asp:HyperLink>
-    </header>
-    <main class="container">
-        <asp:ContentPlaceHolder ID="MainContent" runat="server">
-        </asp:ContentPlaceHolder>
-    </main>
-    <footer>
-        <address>Copyright &copy; 2018 Mariel Martinez</address>
-    </footer>
+    <form id="contentForm" runat="server">
+        <header>
+            <h1><a href="./Home.aspx">FlexiLearn</a></h1>
+            <nav>
+                <ul>
+                    <li><asp:HyperLink ID="HLHome" runat="server" href="./Home.aspx">Home</asp:HyperLink></li>
+                    <li><asp:HyperLink ID="HLDashboard" runat="server" href="./Members/UserDashboard.aspx">Dashboard</asp:HyperLink></li>
+                    <li><asp:HyperLink ID="HLRegistration" runat="server" href="./Members/RequestRegistration.aspx">Register</asp:HyperLink></li>
+                    <li><asp:LinkButton ID="LBLoginLogout" runat="server" OnClick="LBLoginLogout_Click">Login</asp:LinkButton></li>    
+                </ul>
+            </nav>
+        </header>
+        <main class="container">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+        <footer>
+            <address>Copyright &copy; 2018 Mariel Martinez</address>
+        </footer>
+     </form>
 </body>
 </html>

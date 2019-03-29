@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="FlexiLearnMember.master.cs" Inherits="FlexiLearn_MarielMartinez.SecurePages.FlexiLearnMember" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <title>FlexiLearn</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" type="text/css" href="../css/main.css" />
+</head>
+<body>
+    <form id="contentForm" runat="server">
+        <header>
+            <h1><a href="../Home.aspx">FlexiLearn</a></h1>
+            <nav>
+                <ul>
+                    <li><asp:HyperLink ID="HLHome" runat="server" href="../Home.aspx">Home</asp:HyperLink></li>
+                    <li><asp:HyperLink ID="HLDashboard" runat="server" href="./UserDashboard.aspx">Dashboard</asp:HyperLink></li>
+                    <li><asp:HyperLink ID="Registration" runat="server" href="./RequestRegistration.aspx">Register</asp:HyperLink></li>
+                    <li><asp:LinkButton ID="LBLogout" runat="server" OnClick="LBLogout_Click">Logout</asp:LinkButton></li>    
+                </ul>
+            </nav>
+        </header>
+        <main class="container">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+        <footer>
+            <address>Copyright &copy; 2018 Mariel Martinez</address>
+        </footer>
+    </form>
+</body>
+</html>
