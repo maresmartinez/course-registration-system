@@ -67,6 +67,10 @@ namespace FlexiLearn_MarielMartinez.Admins {
                 request.RegistrationStatus = Status.ACCEPTED;
                 requestDAO.ModifyStatus(request);
             }
+
+            allRequests = requestDAO.ReadAll();
+            GVRegistrationRequests.DataSource = allRequests;
+            GVRegistrationRequests.DataBind();
         }
 
         /// <summary>
@@ -87,6 +91,10 @@ namespace FlexiLearn_MarielMartinez.Admins {
                 request.RegistrationStatus = Status.REJECTED;
                 requestDAO.ModifyStatus(request);
             }
+
+            allRequests = requestDAO.ReadAll();
+            GVRegistrationRequests.DataSource = allRequests;
+            GVRegistrationRequests.DataBind();
         }
 
     }

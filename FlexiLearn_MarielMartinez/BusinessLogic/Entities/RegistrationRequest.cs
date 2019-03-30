@@ -50,7 +50,7 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.Entities {
             ID = id;
             RegistrationUser = registrationUser;
             RegistrationCourse = registrationCourse;
-            RegistrationStatus = RegistrationStatus;
+            RegistrationStatus = registrationStatus;
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.Entities {
         public RegistrationRequest(User registrationUser, Course registrationCourse, Status registrationStatus) {
             RegistrationUser = registrationUser;
             RegistrationCourse = registrationCourse;
-            RegistrationStatus = RegistrationStatus;
+            RegistrationStatus = registrationStatus;
         }
 
     }

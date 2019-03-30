@@ -106,7 +106,7 @@ namespace FlexiLearn_MarielMartinez.Members {
                 Course course = courseDAO.SearchByCourseCode(code);
                 User loggedInUser = userTableDAO.SearchByEmail(Context.User.Identity.Name);
                 registrationRequestDAO.AddRegistrationRequest(
-                    new RegistrationRequest(loggedInUser, course, Status.NEW));
+                    new RegistrationRequest(loggedInUser, course, Status.ACCEPTED));
             }
 
             // Redirect to dashboard so they can see the request went through

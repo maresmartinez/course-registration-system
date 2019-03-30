@@ -34,11 +34,11 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
                 connection.Open();
 
 
-                SqlCommand insert = new SqlCommand("INSERT INTO RegistrationRequest (email, coursecode, status)" +
+                SqlCommand insert = new SqlCommand("INSERT INTO RegistrationRequest (email, coursecode, statusCode)" +
                     "VALUES (@UEmail, @CCode, @Status);");
                 insert.Parameters.AddWithValue("@UEmail", request.RegistrationUser.Email);
                 insert.Parameters.AddWithValue("@CCode", request.RegistrationCourse.CourseCode);
-                insert.Parameters.AddWithValue("@Status", request.RegistrationStatus.ToString());
+                insert.Parameters.AddWithValue("@Status", (int) request.RegistrationStatus);
 
                 insert.Connection = connection;
 
@@ -79,9 +79,9 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
                 connection.Open();
 
                 SqlCommand update = new SqlCommand("UPDATE RegistrationRequest " +
-                    "SET status=@RStatus WHERE registrationID=@ID;");
+                    "SET statusCode=@RStatus WHERE registrationID=@ID;");
                 update.Parameters.AddWithValue("@ID", request.ID);
-                update.Parameters.AddWithValue("@RStatus", request.RegistrationStatus.ToString());
+                update.Parameters.AddWithValue("@RStatus", (int)request.RegistrationStatus);
 
                 update.Connection = connection;
 
@@ -115,7 +115,7 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
                         courseDAO.SearchByCourseCode(Convert.ToString(reader["courseCode"])),
 
                         // Create a Status enum
-                        (Status)Enum.Parse(typeof(Status), Convert.ToString(reader["status"]))
+                        (Status) Convert.ToInt32(reader["statusCode"])
                     );
                 }
             }
@@ -140,18 +140,20 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
                     CourseDAO courseDAO = new CourseDAO(connectionString);
                     UserTableDAO userTableDAO = new UserTableDAO(connectionString);
 
+
                     requests.Add(new RegistrationRequest(
                         Convert.ToInt32(reader["registrationID"]),
 
                         // Use the UserTableDAO to retrieve a User object
                         userTableDAO.SearchByEmail(Convert.ToString(reader["email"])),
-                        
+
                         // Use the CourseDAO to retrieve a Course object
                         courseDAO.SearchByCourseCode(Convert.ToString(reader["courseCode"])),
 
                         // Create a Status enum
-                        (Status)Enum.Parse(typeof(Status), Convert.ToString(reader["status"]))
+                        (Status)Convert.ToInt32(reader["statusCode"])
                     ));
+
                 }
 
                 if (requests.Count < 0) {
@@ -191,7 +193,7 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
                         courseDAO.SearchByCourseCode(Convert.ToString(reader["courseCode"])),
 
                         // Create a Status enum
-                        (Status)Enum.Parse(typeof(Status), Convert.ToString(reader["status"]))
+                        (Status)Convert.ToInt32(reader["statusCode"])
                     ));
                 }
 
