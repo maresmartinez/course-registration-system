@@ -42,7 +42,8 @@ namespace FlexiLearn_MarielMartinez.Admins {
             foreach (GridViewRow row in GVRegistrationRequests.Rows) {
                 CheckBox chkSelection = (CheckBox)row.FindControl("ChkSelected");
                 if (chkSelection.Checked) {
-                    int id = Convert.ToInt32(((HiddenField)row.FindControl("HFID")).Value);
+                    HiddenField hf = (HiddenField)row.FindControl("HFID");
+                    int id = Convert.ToInt32(hf.Value);
                     selectedIDs.Add(id);
                 }
             }

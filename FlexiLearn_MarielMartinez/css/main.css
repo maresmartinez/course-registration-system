@@ -2,6 +2,7 @@
   This was created in PROG 32758 - Enterprise Java Development
     Semester: Fall 2018
     Author: Mariel Martinez
+    Modified: March 2019
 */
 
 * {
@@ -15,6 +16,8 @@ body {
     margin: 0;
     background-color: #F5F1F2;
 }
+
+/* Header and Footer */
 
 header, footer {
     background-color: #25323C;
@@ -31,6 +34,34 @@ header {
     border-bottom: 4px solid #E8B92B;
 }
 
+header h2 {
+    color: #FFFFFF;
+}
+
+header input[type=submit] {
+    margin: 5px 40px 0px 40px;
+    padding: 5px 10px;
+}
+
+header a {
+    text-decoration: none;
+    color: #FFFFFF;
+    text-align: left;
+    font-size: 1.2em;
+}
+
+header a:visited {
+    color: #FFFFFF;
+}
+
+header h1 a {
+    color: #E8B92B;
+}
+
+header h1 a:visited {
+    color: #E8B92B;
+}
+
 footer {
     color: #FFFFFF;
     padding: 20px;
@@ -38,14 +69,65 @@ footer {
     text-align: center;
 }
 
+address {
+    font-size: 1.2em;
+    font-style: normal;
+}
+
+/* Navigation Bar */
+nav {
+    width: 80%;
+    margin: auto;
+}
+
+header nav ul {
+    display: grid;
+    grid-gap: 10px;
+    padding: 0;
+    list-style: none;
+    grid-template-columns: repeat(4, 1fr);
+    width: 80%;
+    margin: 5px auto;
+}
+
+header nav a {
+    background-color: #25323C;
+    display: block;
+    text-decoration: none;
+    padding: 0.2rem 0.8rem;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    border-radius: 3px;
+}
+
+header nav a:hover {
+    background-color: #F5F1F2;
+    color: #983625;
+}
+
+#MainMenu_SkipLink {
+    visibility: hidden;
+}
+
+#MainMenu, #MainMenu ul {
+    width: 100% !important;
+}
+
+/* Content */
+
 h1, h2 {
     font-weight: bold;
     margin: 5px;
     color: #25323C;
 }
 
-header h2 {
-    color: #FFFFFF;
+
+.container {
+    margin: 30px auto;
+    overflow: auto;
+    width: 80%;
 }
 
 h1 {
@@ -65,25 +147,20 @@ p, div:not(.aspNetHidden) {
     margin: 4px 2px;
 }
 
-address {
-    font-size: 1.2em;
-    font-style: normal;
-}
-
 a:visited {
     color: #595959;
 }
 
-.container {
-    margin: 30px 40px;
-    overflow: auto;
+a {
+    color: #983625;
 }
 
-header input[type=submit] {
-    margin: 5px 40px 0px 40px;
-    padding: 5px 10px;
+a:visited {
+    color: #25323C
 }
 
+
+/* Form inputs that are not submit or reset */
 form:not(#contentForm) {
     margin: 3px;
     padding: 5px;
@@ -97,7 +174,6 @@ input, select {
     margin: 5px 0 5px 0;
 }
 
-/* Form inputs that are not submit or reset */
 input:not([type=submit]):not([type=reset]), select {
     border: none;
     border-bottom: 2px solid #25323C;
@@ -141,6 +217,8 @@ input[type=submit]:hover, input[type=reset]:hover {
     cursor: pointer;
 }
 
+/* Tables */
+
 table, th, td {
     border: 1px solid darkgrey;
     border-collapse: collapse;
@@ -164,63 +242,4 @@ td {
 
 tr:nth-child(2n) {
     background-color: lightgrey;
-}
-
-header a {
-    text-decoration: none;
-    color: #FFFFFF;
-    text-align: left;
-    font-size: 1.2em;
-}
-
-header a:visited {
-    color: #FFFFFF;
-}
-
-header h1 a {
-    color: #E8B92B;
-}
-
-header h1 a:visited {
-    color: #E8B92B;
-}
-
-a {
-    color: #983625;
-}
-
-a:visited {
-    color: #25323C
-}
-
-/* Navigation Bar */
-header nav ul {
-    display: grid;
-    grid-gap: 10px;
-    padding: 0;
-    list-style: none;
-    grid-template-columns: repeat(4, 1fr);
-    width: 80%;
-    margin: 5px auto;
-}
-
-header nav a {
-    background-color: #25323C;
-    display: block;
-    text-decoration: none;
-    padding: 0.2rem 0.8rem;
-    text-align: center;
-    color: white;
-    text-transform: uppercase;
-    font-size: 1.1rem;
-    border-radius: 3px;
-}
-
-header nav a:hover {
-    background-color: #F5F1F2;
-    color: #983625;
-}
-
-#MainMenu_SkipLink {
-    visibility: hidden;
 }

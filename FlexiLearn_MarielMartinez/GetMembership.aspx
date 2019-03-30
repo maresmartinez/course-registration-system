@@ -5,6 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Create an Account</h1>
     <div>
+        <asp:Label ID="LblSuccess" runat="server" Text=""></asp:Label>
+
         <asp:Label ID="LblName" runat="server" Text=" * Name"></asp:Label>
         <asp:RequiredFieldValidator ID="ReqName" runat="server" ControlToValidate="TxtName" Display="Dynamic" ErrorMessage="(Username is required)" ForeColor="#983625" ValidationGroup="CreateAccount"></asp:RequiredFieldValidator>
         <asp:TextBox ID="TxtName" runat="server"></asp:TextBox>
@@ -15,7 +17,7 @@
         <asp:TextBox ID="TxtEmail" runat="server"></asp:TextBox>
 
         <asp:Label ID="LblPhone" runat="server" Text="Phone Number ( (555)555-5555 )"></asp:Label>
-        <asp:RegularExpressionValidator ID="RegexPhone" runat="server" ControlToValidate="TxtPhone" Display="Dynamic" ErrorMessage="(Phone Number must be in the format (555)555-5555)" ForeColor="#983625" ValidationExpression="^\(?\d\d\d\)?\d\d\d\-?\d\d\d\d$" ValidationGroup="CreateAccount"></asp:RegularExpressionValidator>
+        <asp:RegularExpressionValidator ID="RegexPhone" runat="server" ControlToValidate="TxtPhone" Display="Dynamic" ErrorMessage="(Phone Number must be in the format (555)555-5555)" ForeColor="#983625" ValidationExpression="^\(+\d\d\d\)+\d\d\d\-+\d\d\d\d$" ValidationGroup="CreateAccount"></asp:RegularExpressionValidator>
         <asp:TextBox ID="TxtPhone" runat="server"></asp:TextBox>
 
         <asp:Label ID="LblEducation" runat="server" Text=" * Education Level"></asp:Label>

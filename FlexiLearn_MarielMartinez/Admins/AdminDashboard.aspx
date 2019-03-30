@@ -5,16 +5,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Admin Dashboard</h1>
     <p>This page displays all user requests.</p>
-    <asp:GridView ID="GVRegistrationRequests" runat="server" AutoGenerateColumns="False">
+    <asp:GridView ID="GVRegistrationRequests" runat="server" AutoGenerateColumns="False" DataKeyNames="ID">
         <Columns>
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:CheckBox ID="ChkSelected" runat="server" />
-                </ItemTemplate>
-            </asp:TemplateField>
-
-            <asp:TemplateField>
-                <ItemTemplate>
                     <asp:HiddenField ID="HFID" runat="server" Value='<%#Eval("ID") %>'/>
                 </ItemTemplate>
             </asp:TemplateField>

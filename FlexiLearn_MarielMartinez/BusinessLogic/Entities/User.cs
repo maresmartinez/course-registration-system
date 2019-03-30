@@ -63,7 +63,7 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.Entities {
                 }
 
                 // If phone not null, ensure it is in the right format
-                Regex phoneReg = new Regex(@"^\(?\d\d\d\)?\d\d\d\-?\d\d\d\d$");
+                Regex phoneReg = new Regex(@"^\(+\d\d\d\)+\d\d\d\-+\d\d\d\d$");
                 if (!phoneReg.IsMatch(value)) {
                     throw new ArgumentException("Phone must be in the format (555)555-5555");
                 }

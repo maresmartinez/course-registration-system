@@ -4,16 +4,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h1>User Dashboard</h1>
-    <p>This page will show the details of any registration requests you have submitted.</p>
+    <p>Showing registration requests for <asp:Label ID="LblName" runat="server" Text="Guest"></asp:Label>.</p>
     <asp:GridView ID="GVRegistrationRequests" runat="server" AutoGenerateColumns="False">
         <Columns>
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:CheckBox ID="ChkDeleteRequest" runat="server" />
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField Visible="false">
-                <ItemTemplate>
                     <asp:HiddenField ID="HFID" runat="server" Value='<%#Eval("ID") %>'/>
                 </ItemTemplate>
             </asp:TemplateField>

@@ -23,8 +23,14 @@ namespace FlexiLearn_MarielMartinez.Members {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e) {
-            RegistrationRequestDAO requestDAO = new RegistrationRequestDAO(ConfigurationManager.ConnectionStrings["flexiLearn"].ConnectionString);
+            RegistrationRequestDAO requestDAO = new RegistrationRequestDAO(
+                ConfigurationManager.ConnectionStrings["flexiLearn"].ConnectionString);
             userRequests = requestDAO.GetAllUserRequests(Context.User.Identity.Name);
+
+            UserTableDAO userDAO = new UserTableDAO(
+                ConfigurationManager.ConnectionStrings["flexiLearn"].ConnectionString);
+            User user = userDAO.SearchByEmail(Context.User.Identity.Name);
+            LblName.Text = user.Name;
 
             if (!IsPostBack) {
                 GVRegistrationRequests.DataSource = userRequests;

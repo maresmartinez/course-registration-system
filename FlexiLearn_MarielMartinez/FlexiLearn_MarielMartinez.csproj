@@ -76,6 +76,7 @@
     <Content Include="Logout.aspx" />
     <Content Include="Members\Web.config" />
     <Content Include="Admins\FlexiLearnAdmin.Master" />
+    <Content Include="Admins\Web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Members\RequestRegistration.aspx" />
     <Content Include="Members\UserDashboard.aspx" />

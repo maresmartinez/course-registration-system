@@ -37,26 +37,19 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
                     // Adds users who do NOT have a phone number 
                     insert = new SqlCommand("INSERT INTO UserTable (name, email, education, birthday, password, salt, registration_date) " +
                         "VALUES (@UName, @Email, @Education, @Birthday, @Password, @Salt, @RegistrationDate);");
-                    insert.Parameters.AddWithValue("@UName", user.Name);
-                    insert.Parameters.AddWithValue("@Email", user.Email);
-                    insert.Parameters.AddWithValue("@Education", user.Education.ToString());
-                    insert.Parameters.AddWithValue("@Birthday", user.Birthday);
-                    insert.Parameters.AddWithValue("@Password", user.Password);
-                    insert.Parameters.AddWithValue("@Salt", user.Salt);
-                    insert.Parameters.AddWithValue("@RegistrationDate", user.RegistrationDate);
                 } else {
                     // Adds users who DO have a phone number
                     insert = new SqlCommand("INSERT INTO UserTable (name, email, phone, education, birthday, password, salt, registration_date) " +
-                        "VALUES (@ID, @UName, @Email, @Phone, @Education, @Birthday, @Password, @Salt, @RegistrationDate);");
-                    insert.Parameters.AddWithValue("@UName", user.Name);
-                    insert.Parameters.AddWithValue("@Email", user.Email);
+                        "VALUES (@UName, @Email, @Phone, @Education, @Birthday, @Password, @Salt, @RegistrationDate);");
                     insert.Parameters.AddWithValue("@Phone", user.Phone);
-                    insert.Parameters.AddWithValue("@Education", user.Education.ToString());
-                    insert.Parameters.AddWithValue("@Birthday", user.Birthday);
-                    insert.Parameters.AddWithValue("@Password", user.Password);
-                    insert.Parameters.AddWithValue("@Salt", user.Salt);
-                    insert.Parameters.AddWithValue("@RegistrationDate", user.RegistrationDate);
                 }
+                insert.Parameters.AddWithValue("@UName", user.Name);
+                insert.Parameters.AddWithValue("@Email", user.Email);
+                insert.Parameters.AddWithValue("@Education", user.Education.ToString());
+                insert.Parameters.AddWithValue("@Birthday", user.Birthday);
+                insert.Parameters.AddWithValue("@Password", user.Password);
+                insert.Parameters.AddWithValue("@Salt", user.Salt);
+                insert.Parameters.AddWithValue("@RegistrationDate", user.RegistrationDate);
 
                 insert.Connection = connection;
 

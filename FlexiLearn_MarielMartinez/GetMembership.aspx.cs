@@ -39,15 +39,16 @@ namespace FlexiLearn_MarielMartinez {
             string password = TxtPassword.Text;
 
             User user = null;
-            try {
+            if (string.IsNullOrEmpty(phone)) {
                 user = new User(name, email, level, birthday, password);
-            } catch (ArgumentException ex) {
-                // TODO: make error page to redirect to
-                Response.Redirect("~/GetMembership.aspx");
+            } else {
+                user = new User(name, email, phone, level, birthday, password);
             }
+
             UserTableDAO userDao = new UserTableDAO(ConfigurationManager.ConnectionStrings["flexiLearn"].ConnectionString);
             userDao.AddUser(user);
-            Response.Redirect("~/Login.aspx");
+
+            LblSuccess.Text = "Account successfully created. <a href='login.aspx'>You may login here</a>.<br><br>";
             
         }
     }

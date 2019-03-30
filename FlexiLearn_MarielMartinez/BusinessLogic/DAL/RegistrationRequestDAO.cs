@@ -27,12 +27,9 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
         /// <param name="request">The registration request</param>
         /// <returns>The number of records inserted</returns>
         public int AddRegistrationRequest(RegistrationRequest request) {
-            // TODO: Prevent users from submitting multiple requests for same course
-
             int count = 0;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
-
 
                 SqlCommand insert = new SqlCommand("INSERT INTO RegistrationRequest (email, coursecode, statusCode)" +
                     "VALUES (@UEmail, @CCode, @Status);");

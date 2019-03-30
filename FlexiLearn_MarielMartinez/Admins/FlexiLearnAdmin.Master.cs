@@ -12,7 +12,7 @@ namespace FlexiLearn_MarielMartinez.Admins {
 
         }
 
-        protected void LBLogout_Click(object sender, EventArgs e) {
+        protected void BtnLogout_Click(object sender, EventArgs e) {
             FormsAuthentication.SignOut();
             FormsAuthentication.RedirectToLoginPage();
         }

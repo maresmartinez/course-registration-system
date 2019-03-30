@@ -32,8 +32,7 @@ namespace FlexiLearn_MarielMartinez {
             if (userDao.AuthenticateUser(email, password)) {
                 FormsAuthentication.RedirectFromLoginPage(email, false);
             } else {
-                // TODO show error
-                LblFail.Text = "Email  or password incorrect";
+                LblFail.Text = "Email or password incorrect";
             }
         }
     }

@@ -12,14 +12,11 @@
 <body>
     <form id="contentForm" runat="server">
         <header>
+            <asp:Button ID="BtnLogout" runat="server" Text="Logout" OnClick="BtnLogout_Click" />
             <h1><a href="../Home.aspx">FlexiLearn</a></h1>
             <nav>
-                <ul>
-                    <li><asp:HyperLink ID="HLHome" runat="server" href="../Home.aspx">Home</asp:HyperLink></li>
-                    <li><asp:HyperLink ID="HLDashboard" runat="server" href="./AdminDashboard.aspx">Dashboard</asp:HyperLink></li>
-                    <l1></l1>
-                    <li><asp:LinkButton ID="LBLogout" runat="server" OnClick="LBLogout_Click">Logout</asp:LinkButton></li>    
-                </ul>
+                <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" ShowStartingNode="false" />
+                <asp:Menu ID="MainMenu" runat="server" DataSourceID="SiteMapDataSource1"></asp:Menu>
             </nav>
         </header>
         <main class="container">
