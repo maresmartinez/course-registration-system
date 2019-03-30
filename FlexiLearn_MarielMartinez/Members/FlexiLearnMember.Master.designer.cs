@@ -31,40 +31,31 @@ namespace FlexiLearn_MarielMartinez.SecurePages {
         protected global::System.Web.UI.HtmlControls.HtmlForm contentForm;
         
         /// <summary>
-        /// HLHome control.
+        /// BtnLogout control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HLHome;
+        protected global::System.Web.UI.WebControls.Button BtnLogout;
         
         /// <summary>
-        /// HLDashboard control.
+        /// SiteMapDataSource1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HLDashboard;
+        protected global::System.Web.UI.WebControls.SiteMapDataSource SiteMapDataSource1;
         
         /// <summary>
-        /// Registration control.
+        /// MainMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink Registration;
-        
-        /// <summary>
-        /// LBLogout control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LBLogout;
+        protected global::System.Web.UI.WebControls.Menu MainMenu;
         
         /// <summary>
         /// MainContent control.

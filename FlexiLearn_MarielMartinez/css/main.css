@@ -18,8 +18,12 @@ body {
 
 header, footer {
     background-color: #25323C;
-    text-align: center;
     margin: 0;
+}
+
+header h1 {
+    text-align: center;
+    padding: 0px;
 }
 
 header {
@@ -31,6 +35,7 @@ footer {
     color: #FFFFFF;
     padding: 20px;
     border-top: 4px solid #E8B92B;
+    text-align: center;
 }
 
 h1, h2 {
@@ -70,9 +75,13 @@ a:visited {
 }
 
 .container {
-    width: 80%;
-    margin: 20px auto;
+    margin: 30px 40px;
     overflow: auto;
+}
+
+header input[type=submit] {
+    margin: 5px 40px 0px 40px;
+    padding: 5px 10px;
 }
 
 form:not(#contentForm) {
@@ -212,7 +221,6 @@ header nav a:hover {
     color: #983625;
 }
 
-header a {
-    text-decoration: none;
-    color: #E8B92B;
+#MainMenu_SkipLink {
+    visibility: hidden;
 }

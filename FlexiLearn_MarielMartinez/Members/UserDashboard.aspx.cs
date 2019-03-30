@@ -23,48 +23,34 @@ namespace FlexiLearn_MarielMartinez.Members {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e) {
-            UpdateGVRegistrationRequests();
-        }
-
-        /// <summary>
-        /// Deletes a request record from the database
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void GVRegistrationRequests_RowDeleting(object sender, GridViewDeleteEventArgs e) {
-            RegistrationRequest deletingRequest = userRequests[e.RowIndex];
-
-            RegistrationRequestDAO requestDAO = new RegistrationRequestDAO(ConfigurationManager.ConnectionStrings["flexiLearn"].ConnectionString);
-            requestDAO.DeleteRegistrationRequest(deletingRequest);
-
-            UpdateGVRegistrationRequests();
-        }
-
-        /// <summary>
-        /// Displays the most updated requests records in the database 
-        /// </summary>
-        private void UpdateGVRegistrationRequests() {
             RegistrationRequestDAO requestDAO = new RegistrationRequestDAO(ConfigurationManager.ConnectionStrings["flexiLearn"].ConnectionString);
             userRequests = requestDAO.GetAllUserRequests(Context.User.Identity.Name);
 
-            // Create custom data to display in GridView
+            if (!IsPostBack) {
+                GVRegistrationRequests.DataSource = userRequests;
+                GVRegistrationRequests.DataBind();
+            }
+        }
 
-            //Ref: https://stackoverflow.com/questions/1042618/how-to-create-a-datatable-in-c-sharp-and-how-to-add-rows
-            DataTable requestData = new DataTable();
-            requestData.Columns.Add("Course Code");
-            requestData.Columns.Add("Course Title");
-            requestData.Columns.Add("Request Status");
+        protected void BtnRemove_Click(object sender, EventArgs e) {
 
-            foreach (RegistrationRequest request in userRequests) {
-                DataRow newRow = requestData.NewRow();
-                newRow["Course Code"] = request.RegistrationCourse.CourseCode;
-                newRow["Course Title"] = request.RegistrationCourse.Title;
-                newRow["Request Status"] = request.RegistrationStatus;
-                requestData.Rows.Add(newRow);
+            List<int> selectedIDs = new List<int>();
+            foreach (GridViewRow row in GVRegistrationRequests.Rows) {
+                CheckBox chkSelection = (CheckBox)row.FindControl("ChkDeleteRequest");
+                if (chkSelection.Checked) {
+                    int id = int.Parse(((HiddenField)row.FindControl("HFID")).Value);
+                    selectedIDs.Add(id);
+                }
             }
 
-            // Display data
-            GVRegistrationRequests.DataSource = requestData;
+            RegistrationRequestDAO requestDAO = new RegistrationRequestDAO(
+                ConfigurationManager.ConnectionStrings["flexiLearn"].ConnectionString);
+            foreach (int id in selectedIDs) {
+                requestDAO.DeleteRegistrationRequest(id);
+            }
+
+            userRequests = requestDAO.GetAllUserRequests(Context.User.Identity.Name);
+            GVRegistrationRequests.DataSource = userRequests;
             GVRegistrationRequests.DataBind();
         }
     }

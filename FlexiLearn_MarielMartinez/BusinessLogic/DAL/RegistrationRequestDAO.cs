@@ -50,18 +50,16 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
         /// <summary>
         /// Deletes a registration record in the database
         /// </summary>
-        /// <param name="request">The registration request to be deleted</param>
+        /// <param name="id">The id of the registration request to be deleted</param>
         /// <returns>The number of rows deleted</returns>
-        public int DeleteRegistrationRequest(RegistrationRequest request) {
+        public int DeleteRegistrationRequest(int id) {
             int count = 0;
             using (SqlConnection connection = new SqlConnection(connectionString)) {
                 connection.Open();
 
                 SqlCommand delete = new SqlCommand("DELETE FROM RegistrationRequest " +
-                    "WHERE coursecode=@RCode AND status=@RStatus AND email=@UEmail;");
-                delete.Parameters.AddWithValue("@RCode", request.RegistrationCourse.CourseCode);
-                delete.Parameters.AddWithValue("@RStatus", request.RegistrationStatus.ToString());
-                delete.Parameters.AddWithValue("@UEmail", request.RegistrationUser.Email);
+                    "WHERE registrationID=@ID");
+                delete.Parameters.AddWithValue("@ID", id);
 
                 delete.Connection = connection;
 
@@ -81,16 +79,47 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
                 connection.Open();
 
                 SqlCommand update = new SqlCommand("UPDATE RegistrationRequest " +
-                    "SET status=@RStatus WHERE coursecode=@CCode AND email=@UEmail");
+                    "SET status=@RStatus WHERE registrationID=@ID;");
+                update.Parameters.AddWithValue("@ID", request.ID);
                 update.Parameters.AddWithValue("@RStatus", request.RegistrationStatus.ToString());
-                update.Parameters.AddWithValue("@CCode", request.RegistrationCourse.CourseCode);
-                update.Parameters.AddWithValue("@UEmail", request.RegistrationUser.Email);
 
                 update.Connection = connection;
 
                 count = update.ExecuteNonQuery();
             }
             return count;
+        }
+
+        public RegistrationRequest SearchByRegistrationID(int id) {
+            using (SqlConnection connection = new SqlConnection(connectionString)) {
+                connection.Open();
+
+                SqlCommand select = new SqlCommand("SELECT * FROM RegistrationRequest " +
+                    "WHERE registrationID=@ID;");
+                select.Parameters.AddWithValue("@ID", id);
+
+                select.Connection = connection;
+                SqlDataReader reader = select.ExecuteReader();
+
+                if (reader.Read()) {
+                    CourseDAO courseDAO = new CourseDAO(connectionString);
+                    UserTableDAO userTableDAO = new UserTableDAO(connectionString);
+
+                    return new RegistrationRequest(
+                        Convert.ToInt32(reader["registrationID"]),
+
+                        // Use the UserTableDAO to retrieve a User object
+                        userTableDAO.SearchByEmail(Convert.ToString(reader["email"])),
+
+                        // Use the CourseDAO to retrieve a Course object
+                        courseDAO.SearchByCourseCode(Convert.ToString(reader["courseCode"])),
+
+                        // Create a Status enum
+                        (Status)Enum.Parse(typeof(Status), Convert.ToString(reader["status"]))
+                    );
+                }
+            }
+            return null;
         }
 
         /// <summary>
@@ -112,6 +141,8 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
                     UserTableDAO userTableDAO = new UserTableDAO(connectionString);
 
                     requests.Add(new RegistrationRequest(
+                        Convert.ToInt32(reader["registrationID"]),
+
                         // Use the UserTableDAO to retrieve a User object
                         userTableDAO.SearchByEmail(Convert.ToString(reader["email"])),
                         
@@ -151,6 +182,8 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
                     UserTableDAO userTableDAO = new UserTableDAO(connectionString);
 
                     requests.Add(new RegistrationRequest(
+                        int.Parse(reader["registrationId"].ToString()),
+
                         // Use the UserTableDAO to retrieve a User object
                         userTableDAO.SearchByEmail(Convert.ToString(reader["email"])),
 

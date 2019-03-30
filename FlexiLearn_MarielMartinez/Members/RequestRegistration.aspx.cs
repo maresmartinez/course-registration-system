@@ -17,47 +17,25 @@ namespace FlexiLearn_MarielMartinez.Members {
         List<Course> courses;
 
         /// <summary>
+        /// Connection string for the database
+        /// </summary>
+        string connectionString;
+
+        /// <summary>
         /// When the page loads, all courses from the database are retrieved and displayed
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e) {
-            CourseDAO dao = new CourseDAO(ConfigurationManager.ConnectionStrings["flexiLearn"].ConnectionString);
+            connectionString = ConfigurationManager.ConnectionStrings["flexiLearn"].ConnectionString;
+            CourseDAO dao = new CourseDAO(connectionString);
             courses = dao.ReadAll();
 
-            GVCourses.DataSource = courses;
-            GVCourses.DataBind();
-        }
-
-        /// <summary>
-        /// When a course is selected, a request will be made to register for the course. That request will
-        /// be added to the database.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void GVCourses_SelectedIndexChanged(object sender, EventArgs e) {
-            if (GVCourses.SelectedRow == null) {
-                return;
+            if (!IsPostBack) {
+                GVCourses.DataSource = courses;
+                GVCourses.DataBind();
             }
-
-            // Retrieve course
-            Course course = courses[GVCourses.SelectedIndex];
-
-            // Add new request to database
-
-            //Get User object from database based on the user logged in
-            UserTableDAO userTableDAO = new UserTableDAO(
-                ConfigurationManager.ConnectionStrings["flexiLearn"].ConnectionString);
-            User loggedInUser = userTableDAO.SearchByEmail(Context.User.Identity.Name);
-
-            RegistrationRequestDAO registrationRequestDAO = new RegistrationRequestDAO(
-                ConfigurationManager.ConnectionStrings["flexiLearn"].ConnectionString);
-            registrationRequestDAO.AddRegistrationRequest(
-                new RegistrationRequest(loggedInUser, course, Status.NEW));
-
-            // Redirect to dashboard so they can see the request went through
-            Response.Redirect("./UserDashboard.aspx");
-        }
+        }        
 
         /// <summary>
         /// Displays all courses in the database
@@ -106,6 +84,34 @@ namespace FlexiLearn_MarielMartinez.Members {
             GVCourses.DataBind();
         }
 
-        
+        /// <summary>
+        /// Creates registrations for the courses that were selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void BtnAdd_Click(object sender, EventArgs e) {
+            List<string> selectedCourseCodes = new List<string>();
+            foreach (GridViewRow row in GVCourses.Rows) {
+                CheckBox chkSelection = (CheckBox)row.FindControl("ChkSelectCourse");
+                if (chkSelection.Checked) {
+                    selectedCourseCodes.Add(row.Cells[1].Text);
+                }
+            }
+
+            CourseDAO courseDAO = new CourseDAO(connectionString);
+            UserTableDAO userTableDAO = new UserTableDAO(connectionString);
+            RegistrationRequestDAO registrationRequestDAO = new RegistrationRequestDAO(connectionString);
+
+            foreach (string code in selectedCourseCodes) {
+                Course course = courseDAO.SearchByCourseCode(code);
+                User loggedInUser = userTableDAO.SearchByEmail(Context.User.Identity.Name);
+                registrationRequestDAO.AddRegistrationRequest(
+                    new RegistrationRequest(loggedInUser, course, Status.NEW));
+            }
+
+            // Redirect to dashboard so they can see the request went through
+            Response.Redirect("./UserDashboard.aspx");
+        }
+
     }
 }

@@ -5,6 +5,8 @@ using System.Web;
 
 namespace FlexiLearn_MarielMartinez.BusinessLogic.Entities {
     public enum Status {
-        NEW, ACCEPTED, REJECTED
+        REJECTED = -1,
+        NEW = 0,
+        ACCEPTED = 1
     }
 }

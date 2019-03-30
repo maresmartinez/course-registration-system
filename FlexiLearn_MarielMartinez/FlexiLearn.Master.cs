@@ -10,21 +10,15 @@ namespace FlexiLearn_MarielMartinez {
     public partial class FlexiLearn : System.Web.UI.MasterPage {
         protected void Page_Load(object sender, EventArgs e) {
             if (Request.IsAuthenticated) {
-                HLHome.Visible = true;
-                HLDashboard.Visible = true;
-                HLRegistration.Visible = true;
-                LBLoginLogout.Text = "Logout";
+                BtnLoginLogout.Text = "Logout";
             } else {
-                HLHome.Visible = false;
-                HLDashboard.Visible = false;
-                HLRegistration.Visible = false;
-                LBLoginLogout.Text = "Login";
-            }   
+                BtnLoginLogout.Text = "Login";
+            }
         }
 
-        protected void LBLoginLogout_Click(object sender, EventArgs e) {
+        protected void BtnLoginLogout_Click(object sender, EventArgs e) {
             if (Request.IsAuthenticated) {
-                LBLoginLogout.Text = "Login";
+                BtnLoginLogout.Text = "Login";
                 FormsAuthentication.SignOut();
                 FormsAuthentication.RedirectToLoginPage();
             } else {

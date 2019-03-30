@@ -47,7 +47,7 @@ namespace FlexiLearn_MarielMartinez.BusinessLogic.DAL {
                 } else {
                     // Adds users who DO have a phone number
                     insert = new SqlCommand("INSERT INTO UserTable (name, email, phone, education, birthday, password, salt, registration_date) " +
-                        "VALUES (@UName, @Email, @Phone, @Education, @Birthday, @Password, @Salt, @RegistrationDate);");
+                        "VALUES (@ID, @UName, @Email, @Phone, @Education, @Birthday, @Password, @Salt, @RegistrationDate);");
                     insert.Parameters.AddWithValue("@UName", user.Name);
                     insert.Parameters.AddWithValue("@Email", user.Email);
                     insert.Parameters.AddWithValue("@Phone", user.Phone);

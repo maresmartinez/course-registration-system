@@ -24,5 +24,19 @@
         <asp:Button ID="BtnShowAll" runat="server" Text="Show All" OnClick="BtnShowAll_Click" />
     </div>
     <asp:Label ID="LblInstructions" runat="server" Text="Select Course to Register for:"></asp:Label>
-    <asp:GridView ID="GVCourses" runat="server" AutoGenerateSelectButton="True" OnSelectedIndexChanged="GVCourses_SelectedIndexChanged"></asp:GridView>
+    <asp:GridView ID="GVCourses" runat="server" AutoGenerateColumns="False">
+        <Columns>
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <asp:CheckBox ID="ChkSelectCourse" runat="server" />
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:BoundField DataField="CourseCode" HeaderText ="Course Code" />
+            <asp:BoundField DataField="Title" HeaderText ="Course Title" />
+            <asp:BoundField DataField="Subject" HeaderText ="Subject" />
+            <asp:BoundField DataField="Duration" HeaderText ="Duration (Hours)" />
+            <asp:BoundField DataField="Fee" HeaderText ="Fee ($)" />
+        </Columns>
+    </asp:GridView>
+    <asp:Button ID="BtnAdd" runat="server" Text="Register for Selected Classes" OnClick="BtnAdd_Click" />
 </asp:Content>
